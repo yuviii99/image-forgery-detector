@@ -32,10 +32,19 @@ def upload():
 
     return
 
-# Task 6a: Calculate MD5 Hash
+def caluclate_hash(file_path):
+    md5 = hashlib.md5()
+    with open(file_path, 'rb') as file:
+        while file_chunk := file.read(8192):
+            md5.update(file_chunk)
+    return md5.hexdigest()
 
-
-# Task 6b: Calculate MD5 Hash
+def caluclate_md5():
+    file_path1 = os.path.join(UPLOAD_FOLDER, g.file1.filename)
+    file_path2 = os.path.join(UPLOAD_FOLDER, g.file2.filename)
+    hash1 = calculate_hash(file_path1)
+    hash2 = calculate_hash(file_path2)
+    return hash1==hash2
 
 SSIM_THRESHOLD = 0.9
 
