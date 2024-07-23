@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Uploader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Link to the external CSS file -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function displayImage(imageId, file) {
+            const imgElement = document.getElementById(imageId);
+            imgElement.src = URL.createObjectURL(file);
+        }
+
+        // Task 4a: Handle Upload Request to Backend
+ 
+
+    </script>
+</head>
+<body>
+    <h1>Image Forgery Detector</h1>
+    <!-- Task 2: Design the Frontend -->
+    <div class="image-upload">
+        <div class="upload-btn-wrapper">
+            <button class="btn">Choose Image 1</button>
+            <input type="file" name="file1" id="file1" accept=".png,.jpeg,.jpg" onchange="displayImage('image1', this.files[0])">
+        </div>
+        <div class="upload-btn-wrapper">
+            <button class="btn">Choose Image 2</button>
+            <input type="file" name="file2" id="file2" accept=".png,.jpeg,.jpg" onchange="displayImage('image2',this.files[0])">
+        </div>
+    </div>
+    <div class="image-display">
+        <img id="image1">
+        <img id="image2">
+    </div>
+
+    <button id="upload-button">Upload</button>
+
+    <div id="result-text"></div>
+    </body>
+</html>
