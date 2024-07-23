@@ -45,7 +45,7 @@ def calculate_hash(file_path):
             md5.update(file_chunk)
     return md5.hexdigest()
 
-def caluclate_md5():
+def calculate_md5():
     file_path1 = os.path.join(UPLOAD_FOLDER, g.file1.filename)
     file_path2 = os.path.join(UPLOAD_FOLDER, g.file2.filename)
     hash1 = calculate_hash(file_path1)
