@@ -32,7 +32,7 @@ def upload():
 
     return
 
-def caluclate_hash(file_path):
+def calculate_hash(file_path):
     md5 = hashlib.md5()
     with open(file_path, 'rb') as file:
         while file_chunk := file.read(8192):
