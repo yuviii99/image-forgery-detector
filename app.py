@@ -27,10 +27,16 @@ def upload():
     else:
         return jsonify({'error': 'Upload two images for similarity calculation'}), 400
 
-
-    # Task 7: Determine Forgery and Display Results
-
-    return
+    flag = False
+    if calculate_similarity():
+        if calculate_md5():
+            reply = "No forgery detected!"
+        else:
+            reply = "Image is forged!"
+            flag = True
+    else:
+        reply = "Images are different!"
+    return jsonify({'message': reply, 'flag':flag})
 
 def calculate_hash(file_path):
     md5 = hashlib.md5()
