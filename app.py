@@ -6,7 +6,7 @@ import hashlib
 
 
 app = Flask(__name__)
-UPLOAD_FOLDER = '/usercode/ImageForgeApp/uploads'
+UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
@@ -22,8 +22,8 @@ def upload():
         if not os.path.exists(app.config['UPLOAD_FOLDER']):
             os.makedirs(app.config['UPLOAD_FOLDER'])
     
-        image1.save(os.path.join(app.config['UPLOAD_FOLDER'], g.file1.filename))
-        image2.save(os.path.join(app.config['UPLOAD_FOLDER'], g.file2.filename))
+        g.file1.save(os.path.join(app.config['UPLOAD_FOLDER'], g.file1.filename))
+        g.file2.save(os.path.join(app.config['UPLOAD_FOLDER'], g.file2.filename))
     else:
         return jsonify({'error': 'Upload two images for similarity calculation'}), 400
 
