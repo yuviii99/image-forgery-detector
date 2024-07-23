@@ -28,8 +28,8 @@
                     contentType: false,
                     processData: false,
                     success: function(response){
-                        if(response.flag==true){
-                            newHTML += "<span class='forge-indicator'" + response.message + "&nbsp;</span>";
+                        if(response.flag){
+                            newHTML += "<span class='forge-indicator'>" + response.message + "&nbsp;</span>";
                             $('#result-text').html(newHTML)
                         }
                         else{
