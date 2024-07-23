@@ -6,7 +6,7 @@ import hashlib
 
 
 app = Flask(__name__)
-UPLOAD_FOLDER = '/usercode/ImageForgeApp/uploads'
+UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
@@ -65,7 +65,7 @@ def calculate_similarity():
     image1_resized = cv2.resize(image1, (image2.shape[1], image2.shape[0]))
 
     # Calculate the similarity
-    ssim_score = ssim(image1_resized, image2)
+    ssim_score = structural_similarity(image1_resized, image2)
 
     if ssim_score > SSIM_THRESHOLD:
         return True
