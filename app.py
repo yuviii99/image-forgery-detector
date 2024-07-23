@@ -6,7 +6,7 @@ import hashlib
 
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = '/usercode/ImageForgeApp/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
@@ -37,11 +37,24 @@ def upload():
 
 # Task 6b: Calculate MD5 Hash
 
+SSIM_THRESHOLD = 0.9
 
+def calculate_similarity():
+    # Load and compare image similarity
+    image_path1 = os.path.join(UPLOAD_FOLDER, g.file1.filename)
+    image_path2 = os.path.join(UPLOAD_FOLDER, g.file2.filename)
+    image1 = cv2.imread(image_path1, cv2.IMREAD_GRAYSCALE)
+    image2 = cv2.imread(image_path2, cv2.IMREAD_GRAYSCALE)
 
-# Task 5: Calculate Similarity of Images
+    # Resize the image to have both of the same size
+    image1_resized = cv2.resize(image1, (image2.shape[1], image2.shape[0]))
 
+    # Calculate the similarity
+    ssim_score = ssim(image1_resized, image2)
 
+    if ssim_score > SSIM_THRESHOLD:
+        return True
+    return False
 
 if __name__ == '__main__':
     app.run(debug=True)
