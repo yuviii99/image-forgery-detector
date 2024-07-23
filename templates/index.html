@@ -12,7 +12,39 @@
             imgElement.src = URL.createObjectURL(file);
         }
 
-        // Task 4a: Handle Upload Request to Backend
+        $(document).ready(function(){
+            $('#upload-button').click(function(){
+                var formData = new FormData();
+                var file1Input = $('#file1')[0].files[0];
+                var file2Input = $('#file2')[0].files[0];
+                formData.append('file1', file1Input);
+                formData.append('file2', file2Input);
+                var newHTML = "";
+
+                $.ajax({
+                    url: '/upload',
+                    method: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response){
+                        if(response.flag==true){
+                            newHTML += "<span class='forge-indicator'" + response.message + "&nbsp;</span>";
+                            $('#result-text').html(newHTML)
+                        }
+                        else{
+                            newHTML += "<span class='no-forgery'>" + response.message + "&nbsp;</span>";
+                            $('#result-text').html(newHTML)
+                        }
+                    },
+                    error: function(xhr, status, error){
+                        console.log('AJAX request error:', error);
+                        var errorMessage = xhr.responseJSON.error;
+                        alert(errorMessage);
+                    }
+                });
+            });
+        });
  
 
     </script>

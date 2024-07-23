@@ -6,8 +6,6 @@ import hashlib
 
 
 app = Flask(__name__)
-# Task 3a: Implement Image Upload Functionality
-# Configure the upload folder
 UPLOAD_FOLDER = '/usercode/ImageForgeApp/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -15,8 +13,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def index():
     return render_template('index.html')
 
-# Task 4b: Handle Upload Request to Backend
-
+@app.route('/upload', methods=['POST'])
 def upload():
     if 'file1' in request.files and 'file2' in request.files:
         g.file1 = request.files['file1']
